@@ -9,6 +9,7 @@
   - [Html with twig](#21---html-with-twig)
     - [Extend layouts](#211---extend-layouts)
     - [Include html](#212---include-html)
+    - [More about Twig](#213---more-about-twig)
   - [Style with Scss](#22---style-with-scss)
 
 ## 1 - Getting started
