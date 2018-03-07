@@ -33,19 +33,10 @@ import swPrecache from 'sw-precache';
 import twig from 'gulp-twig';
 import prettify from 'gulp-html-prettify';
 import gulpLoadPlugins from 'gulp-load-plugins';
-import {output as pagespeed} from 'psi';
 import pkg from './package.json';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
-
-// Lint JavaScript
-gulp.task('lint', () =>
-  gulp.src(['app/scripts/**/*.js', '!node_modules/**'])
-    .pipe($.eslint())
-    .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failAfterError()))
-);
 
 // Optimize images
 gulp.task('images', () =>
@@ -133,7 +124,7 @@ gulp.task('scripts', () =>
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe($.concat('main.min.js'))
-    .pipe($.uglify({preserveComments: 'some'}))
+    .pipe($.uglify())
     // Output files
     .pipe($.size({title: 'scripts'}))
     .pipe($.sourcemaps.write('.'))
@@ -213,7 +204,7 @@ gulp.task('serve', ['scripts', 'styles', 'template'], () => {
 
   gulp.watch(['app/**/*.html'], ['template', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['stylesDev', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts', reload]);
+  gulp.watch(['app/scripts/**/*.js'], ['scripts', reload]);
   gulp.watch(['app/images/**/*'], reload);
 });
 
@@ -237,7 +228,7 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean'], cb =>
   runSequence(
     'styles',
-    ['lint', 'html', 'scripts', 'images', 'copy'],
+    ['html', 'scripts', 'images', 'copy'],
     'generate-service-worker',
     cb
   )
@@ -246,7 +237,7 @@ gulp.task('default', ['clean'], cb =>
 gulp.task('unminified', ['clean'], cb =>
   runSequence(
     'styles',
-    ['lint', 'htmlUnminified', 'scripts', 'images', 'copy'],
+    ['htmlUnminified', 'scripts', 'images', 'copy'],
     'generate-service-worker',
     cb
   )
