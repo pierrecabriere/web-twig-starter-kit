@@ -88,11 +88,11 @@ Then, you can reuse your components in your pages :
 
 #### 2.1.3 - More about twig
 
-> For more informations about twig, please reffers to the [official documentation]().
+> For more informations about twig, please reffers to the [official documentation](https://twig.symfony.com).
 
 ### 2.2 - Style with Scss
 
-Scss is very flexible: you can even write basic CSS if you don't know the Scss syntax. If you don't know what a preprocessor is and you are interested in this technology, you can read the [official scss documentation]().<br/>
+Scss is very flexible: you can even write basic CSS if you don't know the Scss syntax. If you don't know what a preprocessor is and you are interested in this technology, you can read the [official scss documentation](https://sass-lang.com/guide).<br/>
 **All your style files have to be in the /app/styles/directory**. To be properly compiled and minified, all of your style have to be in the main.scss file. However, for a proper and more readable code, you shuold create files and include them in the main.scss file.<br/>
 A good practice is to create a .scss file for all your app/html/includes templates.
 
