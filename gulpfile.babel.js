@@ -124,14 +124,7 @@ gulp.task('scripts', () =>
     // Note: Since we are not using useref in the scripts build pipeline,
     //       you need to explicitly list your scripts here in the right order
     //       to be correctly concatenated
-    './app/scripts/main.js',
-    './app/scripts/forms.js',
-    './app/scripts/navbar.js',
-    './app/scripts/configurator.js',
-    './app/scripts/helper.js',
-    './app/scripts/popup.js',
-    './app/scripts/sidebar.js',
-    './app/scripts/chart.js'
+    './app/scripts/main.js'
     // Other scripts
   ])
     .pipe($.newer('.tmp/scripts'))
@@ -257,17 +250,6 @@ gulp.task('unminified', ['clean'], cb =>
     'generate-service-worker',
     cb
   )
-);
-
-// Run PageSpeed Insights
-gulp.task('pagespeed', cb =>
-  // Update the below URL to the public URL of your site
-  pagespeed('example.com', {
-    strategy: 'mobile'
-    // By default we use the PageSpeed Insights free (no API key) tier.
-    // Use a Google Developer API key if you have one: http://goo.gl/RkN0vE
-    // key: 'YOUR_API_KEY'
-  }, cb)
 );
 
 // Copy over the scripts that are used in importScripts as part of the generate-service-worker task.
