@@ -6,10 +6,10 @@
 
 - [Getting started](#1---getting-started)
 - [File structure](#2---file-structure)
-  - [Html with twig](#2.1---html-with-twig)
-    - [Extend layouts](#2.1.1---extend-layouts)
-    - [Include html](#2.1.2---include-html)
-  - [Style with Scss](#2.2---style-with-scss)
+  - [Html with twig](#21---html-with-twig)
+    - [Extend layouts](#211---extend-layouts)
+    - [Include html](#212---include-html)
+  - [Style with Scss](#22---style-with-scss)
 
 ## 1 - Getting started
 ```
