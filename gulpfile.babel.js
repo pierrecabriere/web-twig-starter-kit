@@ -183,7 +183,7 @@ gulp.task('htmlUnminified', () =>
 gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts', 'stylesDev', 'htmlUnminified'], () => {
+gulp.task('serve', ['scripts', 'stylesDev', 'template'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -200,12 +200,12 @@ gulp.task('serve', ['scripts', 'stylesDev', 'htmlUnminified'], () => {
 
   gulp.watch(['app/scripts/**/*.js'], ['scripts', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['stylesDev', reload]);
-  gulp.watch(['app/**/*.html'], ['htmlUnminified', reload]);
+  gulp.watch(['app/**/*.html'], ['template', reload]);
   gulp.watch(['app/images/**/*'], reload);
   
-  gulp.task('scripts')
-  gulp.task('stylesDev')
-  gulp.task('htmlUnminified')
+  gulp.task('scripts');
+  gulp.task('stylesDev');
+  gulp.task('template');
 });
 
 // Build and serve the output from the dist build
