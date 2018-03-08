@@ -38,6 +38,14 @@ import pkg from './package.json';
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
+const scripts = [
+  // Note: Since we are not using useref in the scripts build pipeline,
+  //       you need to explicitly list your scripts here in the right order
+  //       to be correctly concatenated
+  './app/scripts/main.js'
+  // Other scripts
+]
+
 // Optimize images
 gulp.task('images', () =>
   gulp.src('app/images/**/*')
@@ -111,30 +119,30 @@ gulp.task('styles', () => {
 // to enable ES2015 support remove the line `"only": "gulpfile.babel.js",` in the
 // `.babelrc` file.
 gulp.task('scripts', () =>
-  gulp.src([
-    // Note: Since we are not using useref in the scripts build pipeline,
-    //       you need to explicitly list your scripts here in the right order
-    //       to be correctly concatenated
-    './app/scripts/main.js'
-    // Other scripts
-  ])
-    .pipe($.newer('.tmp/scripts'))
+  gulp.src(scripts)
     .pipe($.sourcemaps.init())
     .pipe($.babel())
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('.tmp/scripts'))
     .pipe($.concat('main.min.js'))
     .pipe($.uglify())
     // Output files
     .pipe($.size({title: 'scripts'}))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/scripts'))
+);
+
+gulp.task('scriptsDev', () =>
+  gulp.src(scripts)
+    .pipe($.babel())
+    .pipe($.concat('main.min.js'))
+    // Output files
+    .pipe($.size({title: 'scripts'}))
     .pipe(gulp.dest('.tmp/scripts'))
 );
 
 // Template parsing
 gulp.task('template', () =>
-  gulp.src(['app/**/*.html', 'app/html/**/*.html'])
+  gulp.src(['app/**/*.html'])
     .pipe(twig())
     .pipe(gulp.dest('.tmp'))
 );
@@ -183,7 +191,7 @@ gulp.task('htmlUnminified', () =>
 gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts', 'stylesDev', 'template'], () => {
+gulp.task('serve', ['scriptsDev', 'stylesDev', 'template'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -198,12 +206,12 @@ gulp.task('serve', ['scripts', 'stylesDev', 'template'], () => {
     port: 3000
   });
 
-  gulp.watch(['app/scripts/**/*.js'], ['scripts', reload]);
+  gulp.watch(['app/scripts/**/*.js'], ['scriptsDev', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['stylesDev', reload]);
   gulp.watch(['app/**/*.html'], ['template', reload]);
   gulp.watch(['app/images/**/*'], reload);
   
-  gulp.task('scripts');
+  gulp.task('scriptsDev');
   gulp.task('stylesDev');
   gulp.task('template');
 });
