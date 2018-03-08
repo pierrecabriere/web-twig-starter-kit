@@ -11,6 +11,9 @@
     - [Include html](#212---include-html)
     - [More about Twig](#213---more-about-twig)
   - [Style with Scss](#22---style-with-scss)
+- [Compilation](#3---compilation)
+  - [For development](#31---for-development)
+  - [For production](#32---for-production)
 
 ## 1 - Getting started
 ```
@@ -116,6 +119,18 @@ Then, you have to include the style in the main.scss file
 ```
 
 ## 3 - Compilation
+
+### 3.1 - For development
+```
+gulp serve
+```
+Then gulp is watching your files and keeps your browser up-to-date thanks to BrowserSync.
+
+### 3.2 - For production
+```
+gulp
+```
+Then gulp compile and minify your code inside the /dist directory.
 
 > More documentation to come
 
