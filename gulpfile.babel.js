@@ -197,6 +197,10 @@ gulp.task('serve', ['scripts', 'stylesDev', 'htmlUnminified'], () => {
     server: ['.tmp', 'app'],
     port: 3000
   });
+  
+  gulp.task('scripts')
+  gulp.task('stylesDev')
+  gulp.task('htmlUnminified')
 
   gulp.watch(['app/scripts/**/*.js'], ['scripts', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['stylesDev', reload]);
