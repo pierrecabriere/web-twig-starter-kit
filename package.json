@@ -1,6 +1,6 @@
 {
   "name": "web-twig-starter-kit",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Front-end starter kit based on the Google's web-starter-kit with twig integration",
   "keywords": [
     "frontend",
