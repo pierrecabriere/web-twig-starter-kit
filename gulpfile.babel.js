@@ -183,7 +183,7 @@ gulp.task('htmlUnminified', () =>
 gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts', 'styles', 'template'], () => {
+gulp.task('serve', ['scripts', 'stylesDev', 'htmlUnminified'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -198,13 +198,9 @@ gulp.task('serve', ['scripts', 'styles', 'template'], () => {
     port: 3000
   });
 
-  gulp.start('template');
-  gulp.start('stylesDev');
-  gulp.start('scripts');
-
-  gulp.watch(['app/**/*.html'], ['template', reload]);
-  gulp.watch(['app/styles/**/*.{scss,css}'], ['stylesDev', reload]);
   gulp.watch(['app/scripts/**/*.js'], ['scripts', reload]);
+  gulp.watch(['app/styles/**/*.{scss,css}'], ['stylesDev', reload]);
+  gulp.watch(['app/**/*.html'], ['htmlUnminified', reload]);
   gulp.watch(['app/images/**/*'], reload);
 });
 
