@@ -197,15 +197,15 @@ gulp.task('serve', ['scripts', 'stylesDev', 'htmlUnminified'], () => {
     server: ['.tmp', 'app'],
     port: 3000
   });
-  
-  gulp.task('scripts')
-  gulp.task('stylesDev')
-  gulp.task('htmlUnminified')
 
   gulp.watch(['app/scripts/**/*.js'], ['scripts', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['stylesDev', reload]);
   gulp.watch(['app/**/*.html'], ['htmlUnminified', reload]);
   gulp.watch(['app/images/**/*'], reload);
+  
+  gulp.task('scripts')
+  gulp.task('stylesDev')
+  gulp.task('htmlUnminified')
 });
 
 // Build and serve the output from the dist build
