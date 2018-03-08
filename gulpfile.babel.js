@@ -210,10 +210,6 @@ gulp.task('serve', ['scriptsDev', 'stylesDev', 'template'], () => {
   gulp.watch(['app/styles/**/*.{scss,css}'], ['stylesDev', reload]);
   gulp.watch(['app/**/*.html'], ['template', reload]);
   gulp.watch(['app/images/**/*'], reload);
-  
-  gulp.task('scriptsDev');
-  gulp.task('stylesDev');
-  gulp.task('template');
 });
 
 // Build and serve the output from the dist build
